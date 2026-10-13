@@ -1,0 +1,24 @@
+run: llm-qwen2.5-0.5b-lora
+seed: 13
+model:
+  base: Qwen/Qwen2.5-0.5B-Instruct
+  revision: 7ae557604adf67be50417f59c2c2f167def9a775
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+train:
+  # Sized for one Colab T4 (16 GB): 2000 steps x 16 lines = 32k training lines.
+  data: data/train/train.jsonl
+  steps: 2000
+  batch_size: 16
+  grad_accum: 1
+  max_length: 320
+  lr: 2.0e-4
+  warmup_ratio: 0.05
+  weight_decay: 0.0
+  fp16: true
+  gradient_checkpointing: true
+  log_every: 50
+output: checkpoints/llm-qwen2.5-0.5b-lora

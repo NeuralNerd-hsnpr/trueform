@@ -1,0 +1,11 @@
+run: llm-qwen2.5-1.5b-zeroshot
+seed: 13
+backend: llm
+base: Qwen/Qwen2.5-1.5B-Instruct
+revision: 989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+adapter: null
+constrained: false
+batch_size: 16
+test_sets:
+  in_domain: data/test_in_domain.jsonl
+  out_of_domain: data/test_out_of_domain.jsonl
