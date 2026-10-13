@@ -1,0 +1,27 @@
+# Pinned data sources. prepare_data.py downloads these, records SHA-256
+# hashes in data/manifest.json and fails if a pinned hash no longer matches.
+seed: 13
+wikitext:
+  repo: Salesforce/wikitext
+  revision: b08601e04326c79dfdd32d625aee71d232d685c3
+  files:
+    train: wikitext-103-raw-v1/train-00000-of-00002.parquet
+    validation: wikitext-103-raw-v1/validation-00000-of-00001.parquet
+    test: wikitext-103-raw-v1/test-00000-of-00001.parquet
+gutenberg:
+  # Public domain in the USA. Project Gutenberg headers/footers are stripped.
+  books:
+    1661: The Adventures of Sherlock Holmes
+    1342: Pride and Prejudice
+    74: The Adventures of Tom Sawyer
+    11: Alice's Adventures in Wonderland
+  url: https://gutenberg.pglaf.org/cache/epub/{id}/pg{id}.txt  # official PG mirror
+segments:
+  min_words: 6
+  max_words: 60
+sizes:
+  train: 300000
+  dev: 2000
+  test_in_domain: 1000
+  test_out_of_domain: 1000
+  ci_sample: 200

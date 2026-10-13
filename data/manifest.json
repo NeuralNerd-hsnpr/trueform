@@ -1,0 +1,80 @@
+{
+  "config": {
+    "seed": 13,
+    "wikitext": {
+      "repo": "Salesforce/wikitext",
+      "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+      "files": {
+        "train": "wikitext-103-raw-v1/train-00000-of-00002.parquet",
+        "validation": "wikitext-103-raw-v1/validation-00000-of-00001.parquet",
+        "test": "wikitext-103-raw-v1/test-00000-of-00001.parquet"
+      }
+    },
+    "gutenberg": {
+      "books": {
+        "1661": "The Adventures of Sherlock Holmes",
+        "1342": "Pride and Prejudice",
+        "74": "The Adventures of Tom Sawyer",
+        "11": "Alice's Adventures in Wonderland"
+      },
+      "url": "https://gutenberg.pglaf.org/cache/epub/{id}/pg{id}.txt"
+    },
+    "segments": {
+      "min_words": 6,
+      "max_words": 60
+    },
+    "sizes": {
+      "train": 300000,
+      "dev": 2000,
+      "test_in_domain": 1000,
+      "test_out_of_domain": 1000,
+      "ci_sample": 200
+    }
+  },
+  "source_sha256": {
+    "wikitext/train": "74da360f23826045b3e6ac6375411fdb15f003030aa74f2596ed08b857cb9212",
+    "wikitext/validation": "204929b7ff9d6184953f867dedb860e40aa69c078fc1e54b3baaa8fb28511c4c",
+    "wikitext/test": "5f1bea067869d04849c0f975a2b29c4ff47d867f484f5010ea5e861eab246d91",
+    "gutenberg/1661": "922e2a12ccb43a4c9544c260b2166c6ad2097aeb5957faeee113f173bb857cd0",
+    "gutenberg/1342": "3f6bb9d6f78e0293b56acd4714dd68cb7d6d1d293402031ce9d5a216bcaf9d75",
+    "gutenberg/74": "74d77384b123a6360db9ab58463cff8b38df8525fbdc6000c81ee388e1f3cf10",
+    "gutenberg/11": "01b38ea4c710a84bc18d0bd41271a5a1a92b94e97b2812f4dece97d4a694725e"
+  },
+  "output_sha256": {
+    "train/train.jsonl": "9c4d92395ad0c839fd178fea74cb20f1c41d646d76df27b869bae1dfdefdbf85",
+    "dev.jsonl": "6f51210f60ba492df428455991184e65f778212656a046a96daac6d6fdf6ced2",
+    "test_in_domain.jsonl": "52276276ae0c0e72321388b2d45fc2a17e5dae2ea9874691dc26830398765064",
+    "test_out_of_domain.jsonl": "05d120fd641af8a3c9f9e6ebee536624fca09bc77672f55d8098e8040ea7ed2c",
+    "ci_sample.jsonl": "6023c452cdb7f24ce78b50bebe1ce74c275c53bf1ec69819168536dbfdc714dd"
+  },
+  "counts": {
+    "train": 300000,
+    "train_sentences_indexed": 407566,
+    "dev": 2000,
+    "test_in_domain": 1000,
+    "test_out_of_domain": 1000
+  },
+  "overlap_check": {
+    "method": "exact match on normalized sentences (>=4 words) and whole lines",
+    "dev": {
+      "candidates": 4000,
+      "dropped_overlap": 47,
+      "kept": 2000
+    },
+    "test_in_domain": {
+      "candidates": 2000,
+      "dropped_overlap": 25,
+      "kept": 1000
+    },
+    "test_out_of_domain": {
+      "candidates": 2000,
+      "dropped_overlap": 1,
+      "kept": 1000
+    },
+    "final_overlap": {
+      "dev": 0,
+      "test_in_domain": 0,
+      "test_out_of_domain": 0
+    }
+  }
+}
