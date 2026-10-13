@@ -1,0 +1,21 @@
+run: tagger-electra-small
+seed: 13
+model:
+  base: google/electra-small-discriminator
+  revision: fa8239aadc095e9164941d05878b98afe9b953c3
+  pretrained: true  # false = same architecture and tokenizer, random weights
+train:
+  data: data/train/train.jsonl
+  dev_data: data/dev.jsonl
+  dev_lines: 500
+  steps: 4000
+  batch_size: 32
+  max_length: 256
+  lr: 3.0e-4
+  warmup_ratio: 0.06
+  weight_decay: 0.01
+  dropout: 0.1
+  threads: 2
+  log_every: 100
+  eval_every: 1000
+output: checkpoints/tagger-electra-small
