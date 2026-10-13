@@ -57,7 +57,24 @@ def build() -> str:
               "the Capitalized and UPPER classes. \"Words altered\" counts test lines whose words differ "
               "from the input. Per-mark and per-class scores, hardware and hashes are in "
               "`results/<run>/metrics.json`; every altered line is listed in `results/<run>/failures_*.jsonl`.")
-    return "\n".join(lines) + "\n" + footer
+    train_lines = []
+    for run, label in RUNS:
+        path = ROOT / "results" / run / "metrics.json"
+        if not path.exists():
+            continue
+        tr = json.loads(path.read_text()).get("training")
+        if not tr:
+            continue
+        hw = tr["hardware"]
+        where = hw["gpu"] or f"CPU only ({hw['cpu_threads']} threads of {hw['cpu']})"
+        train_lines.append(f"| {label} | {tr['examples']:,} lines, {tr['steps']:,} steps | "
+                           f"{tr['train_seconds'] / 60:.0f} min | {where} | {tr['gpu_hours']} | "
+                           f"{tr['peak_memory_mb'].get('gpu_mb', '–')} GPU / {tr['peak_memory_mb']['cpu_rss_mb']:,.0f} RSS |")
+    training = ""
+    if train_lines:
+        training = ("\n\n| Training run | Data | Time | Hardware | GPU-hours | Peak memory (MB) |\n"
+                    "|---|---|---|---|---|---|\n" + "\n".join(train_lines))
+    return "\n".join(lines) + "\n" + footer + training
 
 
 def main() -> None:
