@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install (CPU torch)
+        run: |
+          pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[llm,dev]"
+      - name: Tests
+        run: pytest -q
+      - name: Fetch the published tagger
+        run: hf download NeuralNerd-hsnpr/trueform-tagger-electra-small --local-dir checkpoints/tagger-electra-small
+      - name: Tagger evaluation on the CI sample must match committed metrics
+        run: python scripts/evaluate.py --config configs/eval/ci-tagger.yaml --check
+      - name: README table is generated from metrics.json
+        run: python scripts/make_table.py --check

@@ -64,6 +64,9 @@ def load_backend(cfg: dict, device: str):
 
 def compare(fresh: dict, committed: dict, tol: float) -> list[str]:
     problems = []
+    a, b = fresh["model"].get("sha256"), committed["model"].get("sha256")
+    if a and b and a != b:
+        problems.append(f"checkpoint hash {a[:12]} differs from committed {b[:12]}")
     for name, m in fresh["test_sets"].items():
         old = committed["test_sets"].get(name)
         if old is None:

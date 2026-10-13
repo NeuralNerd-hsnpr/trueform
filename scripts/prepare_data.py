@@ -173,6 +173,7 @@ def write_jsonl(path: Path, rows: list[dict]) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="configs/data.yaml")
+    ap.add_argument("--update", action="store_true", help="accept source files whose hashes changed")
     args = ap.parse_args()
     cfg = yaml.safe_load(open(ROOT / args.config))
     rng = random.Random(cfg["seed"])
@@ -181,6 +182,12 @@ def main() -> None:
 
     paths = download(cfg)
     hashes = {k: sha256(p) for k, p in paths.items()}
+    pinned_path = OUT / "manifest.json"
+    if pinned_path.exists() and not args.update:
+        pinned = json.loads(pinned_path.read_text())["source_sha256"]
+        changed = [k for k in hashes if pinned.get(k) not in (None, hashes[k])]
+        if changed:
+            raise SystemExit(f"source files changed since they were pinned: {changed} (use --update to accept)")
 
     split_pairs = {}
     for split in ("train", "validation", "test"):
