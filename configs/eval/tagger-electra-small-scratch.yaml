@@ -1,0 +1,9 @@
+run: tagger-electra-small-scratch
+seed: 13
+backend: tagger
+checkpoint: checkpoints/tagger-electra-small-scratch
+batch_size: 32
+threads: 4
+test_sets:
+  in_domain: data/test_in_domain.jsonl
+  out_of_domain: data/test_out_of_domain.jsonl

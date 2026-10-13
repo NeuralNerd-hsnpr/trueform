@@ -1,0 +1,9 @@
+# Small fixed CPU check run in CI. Compared against results/ci-tagger/metrics.json.
+run: ci-tagger
+seed: 13
+backend: tagger
+checkpoint: checkpoints/tagger-electra-small
+batch_size: 32
+threads: 2
+test_sets:
+  ci_sample: data/ci_sample.jsonl
