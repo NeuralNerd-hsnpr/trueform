@@ -1,0 +1,12 @@
+seed: 13
+threads: 2
+batch_size: 32
+limit: null
+device: cpu
+price_per_hour_usd: null
+check_tolerance: 0.005
+run: ci-tagger
+backend: tagger
+checkpoint: checkpoints/tagger-electra-small
+test_sets:
+  ci_sample: data/ci_sample.jsonl

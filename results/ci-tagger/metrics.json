@@ -1,0 +1,111 @@
+{
+  "run": "ci-tagger",
+  "date": "2026-10-13T13:52:08+00:00",
+  "git_commit": "07b1a55fdf7d36cf6f57468f432fa8bfc62c03bc",
+  "seed": 13,
+  "backend": "tagger",
+  "model": {
+    "checkpoint": "checkpoints/tagger-electra-small",
+    "base_model": "google/electra-small-discriminator",
+    "base_revision": "fa8239aadc095e9164941d05878b98afe9b953c3",
+    "pretrained": true,
+    "sha256": "d95154d88c0ba2acc1fd6a14a511283cedf67cb6703c63dafed030bac908c463",
+    "hub_revision": null
+  },
+  "data_sha256": {
+    "ci_sample": "6023c452cdb7f24ce78b50bebe1ce74c275c53bf1ec69819168536dbfdc714dd",
+    "train": "9c4d92395ad0c839fd178fea74cb20f1c41d646d76df27b869bae1dfdefdbf85"
+  },
+  "training": {
+    "steps": 4000,
+    "examples": 128000,
+    "train_seconds": 4035.4,
+    "peak_memory_mb": {
+      "cpu_rss_mb": 2465.5
+    },
+    "hardware": {
+      "cpu": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+      "cpu_threads": 2,
+      "cpu_count": 4,
+      "gpu": null,
+      "torch": "2.14.1+cpu",
+      "python": "3.13.16"
+    },
+    "seed": 13,
+    "gpu_hours": 0.0,
+    "cost_usd": null
+  },
+  "efficiency": {
+    "cpu": {
+      "words_per_second": 2203.952973833871,
+      "batch_size": 32,
+      "peak_memory": {
+        "cpu_rss_mb": 561.8
+      },
+      "hardware": {
+        "cpu": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+        "cpu_threads": 2,
+        "cpu_count": 4,
+        "gpu": null,
+        "torch": "2.14.1+cpu",
+        "python": "3.13.16"
+      }
+    }
+  },
+  "test_sets": {
+    "ci_sample": {
+      "lines": 200,
+      "words": 5452,
+      "punctuation": {
+        ",": {
+          "precision": 0.7807308970099668,
+          "recall": 0.7099697885196374,
+          "f1": 0.7436708860759494,
+          "support": 331
+        },
+        ".": {
+          "precision": 0.9084507042253521,
+          "recall": 0.9381818181818182,
+          "f1": 0.923076923076923,
+          "support": 275
+        },
+        "?": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1
+        },
+        "micro": {
+          "precision": 0.8427350427350427,
+          "recall": 0.8121911037891268,
+          "f1": 0.8271812080536912,
+          "support": 607
+        }
+      },
+      "casing": {
+        "accuracy": 0.9783565663976522,
+        "cap": {
+          "precision": 0.9518768046198267,
+          "recall": 0.9365530303030303,
+          "f1": 0.9441527446300716,
+          "support": 1056
+        },
+        "upper": {
+          "precision": 0.9302325581395349,
+          "recall": 0.9090909090909091,
+          "f1": 0.9195402298850575,
+          "support": 44
+        },
+        "micro": {
+          "precision": 0.9510166358595195,
+          "recall": 0.9354545454545454,
+          "f1": 0.9431714023831348,
+          "support": 1100
+        }
+      },
+      "lines_words_altered": 0,
+      "lines_roundtrip_failed": 0,
+      "words_per_second": 2203.952973833871
+    }
+  }
+}

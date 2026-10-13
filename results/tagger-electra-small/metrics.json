@@ -1,0 +1,166 @@
+{
+  "run": "tagger-electra-small",
+  "date": "2026-10-13T13:51:30+00:00",
+  "git_commit": "07b1a55fdf7d36cf6f57468f432fa8bfc62c03bc",
+  "seed": 13,
+  "backend": "tagger",
+  "model": {
+    "checkpoint": "checkpoints/tagger-electra-small",
+    "base_model": "google/electra-small-discriminator",
+    "base_revision": "fa8239aadc095e9164941d05878b98afe9b953c3",
+    "pretrained": true,
+    "sha256": "d95154d88c0ba2acc1fd6a14a511283cedf67cb6703c63dafed030bac908c463",
+    "hub_revision": null
+  },
+  "data_sha256": {
+    "in_domain": "52276276ae0c0e72321388b2d45fc2a17e5dae2ea9874691dc26830398765064",
+    "out_of_domain": "05d120fd641af8a3c9f9e6ebee536624fca09bc77672f55d8098e8040ea7ed2c",
+    "train": "9c4d92395ad0c839fd178fea74cb20f1c41d646d76df27b869bae1dfdefdbf85"
+  },
+  "training": {
+    "steps": 4000,
+    "examples": 128000,
+    "train_seconds": 4035.4,
+    "peak_memory_mb": {
+      "cpu_rss_mb": 2465.5
+    },
+    "hardware": {
+      "cpu": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+      "cpu_threads": 2,
+      "cpu_count": 4,
+      "gpu": null,
+      "torch": "2.14.1+cpu",
+      "python": "3.13.16"
+    },
+    "seed": 13,
+    "gpu_hours": 0.0,
+    "cost_usd": null
+  },
+  "efficiency": {
+    "cpu": {
+      "words_per_second": 3144.9687173542766,
+      "batch_size": 32,
+      "peak_memory": {
+        "cpu_rss_mb": 567.6
+      },
+      "hardware": {
+        "cpu": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+        "cpu_threads": 4,
+        "cpu_count": 4,
+        "gpu": null,
+        "torch": "2.14.1+cpu",
+        "python": "3.13.16"
+      }
+    }
+  },
+  "test_sets": {
+    "in_domain": {
+      "lines": 1000,
+      "words": 28051,
+      "punctuation": {
+        ",": {
+          "precision": 0.7748556767158435,
+          "recall": 0.7356881851400731,
+          "f1": 0.7547641362074351,
+          "support": 1642
+        },
+        ".": {
+          "precision": 0.9054621848739496,
+          "recall": 0.9410480349344978,
+          "f1": 0.9229122055674519,
+          "support": 1374
+        },
+        "?": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 3
+        },
+        "micro": {
+          "precision": 0.8372949447606294,
+          "recall": 0.8284200066247102,
+          "f1": 0.8328338328338328,
+          "support": 3019
+        }
+      },
+      "casing": {
+        "accuracy": 0.9750454529250294,
+        "cap": {
+          "precision": 0.9438738077769626,
+          "recall": 0.9317399963787797,
+          "f1": 0.9377676537585421,
+          "support": 5523
+        },
+        "upper": {
+          "precision": 0.9541284403669725,
+          "recall": 0.896551724137931,
+          "f1": 0.9244444444444444,
+          "support": 232
+        },
+        "micro": {
+          "precision": 0.944268077601411,
+          "recall": 0.9303214596003475,
+          "f1": 0.9372428884026258,
+          "support": 5755
+        }
+      },
+      "lines_words_altered": 0,
+      "lines_roundtrip_failed": 0,
+      "words_per_second": 3166.9591491348765
+    },
+    "out_of_domain": {
+      "lines": 1000,
+      "words": 24433,
+      "punctuation": {
+        ",": {
+          "precision": 0.5680958385876419,
+          "recall": 0.4702505219206681,
+          "f1": 0.5145631067961165,
+          "support": 1916
+        },
+        ".": {
+          "precision": 0.8184397163120567,
+          "recall": 0.6968599033816425,
+          "f1": 0.7527723418134377,
+          "support": 1656
+        },
+        "?": {
+          "precision": 0.7857142857142857,
+          "recall": 0.16541353383458646,
+          "f1": 0.2732919254658385,
+          "support": 133
+        },
+        "micro": {
+          "precision": 0.6868386243386243,
+          "recall": 0.5605937921727395,
+          "f1": 0.6173279833556248,
+          "support": 3705
+        }
+      },
+      "casing": {
+        "accuracy": 0.97450169852249,
+        "cap": {
+          "precision": 0.918443696221474,
+          "recall": 0.8586918502973068,
+          "f1": 0.8875632682574115,
+          "support": 2859
+        },
+        "upper": {
+          "precision": 0.5714285714285714,
+          "recall": 0.36363636363636365,
+          "f1": 0.4444444444444444,
+          "support": 11
+        },
+        "micro": {
+          "precision": 0.9175373134328358,
+          "recall": 0.856794425087108,
+          "f1": 0.8861261261261262,
+          "support": 2870
+        }
+      },
+      "lines_words_altered": 0,
+      "lines_roundtrip_failed": 0,
+      "words_per_second": 3120.095569846165
+    }
+  }
+}

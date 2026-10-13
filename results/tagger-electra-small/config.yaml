@@ -1,0 +1,13 @@
+seed: 13
+threads: 4
+batch_size: 32
+limit: null
+device: cpu
+price_per_hour_usd: null
+check_tolerance: 0.005
+run: tagger-electra-small
+backend: tagger
+checkpoint: checkpoints/tagger-electra-small
+test_sets:
+  in_domain: data/test_in_domain.jsonl
+  out_of_domain: data/test_out_of_domain.jsonl
