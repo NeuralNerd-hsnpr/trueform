@@ -112,7 +112,7 @@ class Tagger:
         save_checkpoint(self.model, self.tokenizer, self.meta, path)
 
     @torch.inference_mode()
-    def predict(self, batch_words: list[list[str]]) -> list[tuple[list[str], list[str]]]:
+    def predict(self, batch_words: list[list[str]], batch_size: int = 32) -> list[tuple[list[str], list[str]]]:
         """Labels for each line. Words the encoder never saw get lower / no mark."""
         jobs = []  # (line, start, keep_start, keep_end, words)
         for i, words in enumerate(batch_words):
@@ -120,8 +120,8 @@ class Tagger:
                 jobs.append((i, s, ks, ke, words[s:e]))
         results = [(["lower"] * len(w), [""] * len(w)) for w in batch_words]
         jobs = [j for j in jobs if j[4]]
-        for k in range(0, len(jobs), 32):
-            chunk = jobs[k : k + 32]
+        for k in range(0, len(jobs), batch_size):
+            chunk = jobs[k : k + batch_size]
             ids, mask, pos, has = encode_batch(self.tokenizer, [j[4] for j in chunk], self.max_length)
             case_logits, mark_logits = self.model(ids.to(self.device), mask.to(self.device), pos.to(self.device))
             case_ids = case_logits.argmax(-1).cpu()
@@ -135,10 +135,10 @@ class Tagger:
                     marks[s + j] = MARKS[mark_ids[b, j]]
         return results
 
-    def restore(self, texts: list[str]) -> list[str]:
+    def restore(self, texts: list[str], batch_size: int = 32) -> list[str]:
         batch_words = [t.split() for t in texts]
         out = []
-        for words, (cases, marks) in zip(batch_words, self.predict(batch_words)):
+        for words, (cases, marks) in zip(batch_words, self.predict(batch_words, batch_size)):
             out.append(render(words, cases, marks))
         return out
 
